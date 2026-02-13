@@ -53,7 +53,8 @@ html, body {
     justify-content: center;
     align-items: center;
 }
-html[lang="en"] body {
+html[lang="en"] body,
+html[lang="th"] body {
     font-size: calc(24px * var(--scale));
 }
 
@@ -185,7 +186,8 @@ img {
     font-size: calc(36px * var(--scale));
     color: var(--text-color);
 }
-html[lang="en"] .title-bar h1 {
+html[lang="en"] .title-bar h1,
+html[lang="th"] .title-bar h1 {
     font-size: calc(24px * var(--scale));
 }
 
@@ -363,7 +365,8 @@ html[lang="en"] .title-bar h1 {
     left: 50%;
     transform: translate(-50%, 20%);
 }
-html[lang="en"] .btn-next {
+html[lang="en"] .btn-next,
+html[lang="th"] .btn-next {
     font-size: calc(24px * var(--scale));
 }
 

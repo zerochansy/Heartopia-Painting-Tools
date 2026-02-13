@@ -6,7 +6,7 @@
 const i18n = {
     currentLang: 'zh-TW',
     translations: {},
-    supportedLangs: ['zh-TW', 'zh-CN', 'en'],
+    supportedLangs: ['zh-TW', 'zh-CN', 'en', 'th'],
 
     /**
      * Initialize language system
@@ -42,7 +42,10 @@ const i18n = {
             'zh': 'zh-CN',
             'en': 'en',
             'en-US': 'en',
-            'en-GB': 'en'
+            'en-GB': 'en',
+            'th': 'th',
+            'th-th': 'th',
+            'th-TH': 'th'
         };
 
         // Check localStorage first

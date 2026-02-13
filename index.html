@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,35 +12,41 @@
     <!-- Primary Meta Tags -->
     <title data-i18n="title">Heartopia Painting Tools</title>
     <meta name="title" data-i18n="title" content="Heartopia Painting Tools" />
-    <meta name="description" data-i18n="toolsInfoContent" content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily." />
+    <meta name="description" data-i18n="toolsInfoContent"
+        content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily." />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://zerochansy.github.io/Heartopia-Painting-Tools/" />
     <meta property="og:title" data-i18n="title" content="Heartopia Painting Tools" />
-    <meta property="og:description" data-i18n="toolsInfoContent" content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily." />
+    <meta property="og:description" data-i18n="toolsInfoContent"
+        content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily." />
     <meta property="og:image" content="https://zerochansy.github.io/Heartopia-Painting-Tools/assets/images/seo.jpg" />
 
     <!-- X (Twitter) -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://zerochansy.github.io/Heartopia-Painting-Tools/" />
     <meta property="twitter:title" data-i18n="title" content="Heartopia Painting Tools" />
-    <meta property="twitter:description" data-i18n="toolsInfoContent" content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily." />
-    <meta property="twitter:image" content="https://zerochansy.github.io/Heartopia-Painting-Tools/assets/images/seo.jpg" />
+    <meta property="twitter:description" data-i18n="toolsInfoContent"
+        content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily." />
+    <meta property="twitter:image"
+        content="https://zerochansy.github.io/Heartopia-Painting-Tools/assets/images/seo.jpg" />
 
     <!-- Meta Tags Generated with https://metatags.io -->
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
-    
+
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
     <!-- Styles -->
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
 <body>
     <span id="version">v1.0.6</span>
     <!-- Main Container -->
@@ -49,7 +56,7 @@
             <img src="assets/images/icon_btn_lang.svg" alt="Language">
         </button>
 
-       
+
 
         <!-- Step 1: Size Selection -->
         <div id="step-1" class="step">
@@ -57,7 +64,7 @@
                 <!-- Title -->
                 <div class="title-bar">
                     <h1 data-i18n="title"></h1>
-                     <!-- Info Button (Top Right) -->
+                    <!-- Info Button (Top Right) -->
                     <button id="info-btn" class="info-btn">
                         <img src="assets/images/icon_info.svg" alt="Info">
                     </button>
@@ -139,7 +146,7 @@
                 <!-- Title -->
                 <div class="title-bar">
                     <h1 data-i18n="title"></h1>
-                     <!-- Info Button (Top Right) -->
+                    <!-- Info Button (Top Right) -->
                     <button id="info-btn" class="info-btn">
                         <img src="assets/images/icon_info.svg" alt="Info">
                     </button>
@@ -162,7 +169,7 @@
                 <div class="upload-container">
                     <div id="upload-area" class="upload-area">
                         <svg class="upload-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
                         </svg>
                         <p data-i18n="uploadText"></p>
                         <input type="file" id="image-input" accept="image/*" style="display: none;">
@@ -171,7 +178,8 @@
                 </div>
 
                 <!-- Next Button -->
-                <button class="btn-next" id="btn-step2-next" disabled onclick="app.nextStep()" data-i18n="next"></button>
+                <button class="btn-next" id="btn-step2-next" disabled onclick="app.nextStep()"
+                    data-i18n="next"></button>
             </div>
         </div>
 
@@ -181,7 +189,7 @@
                 <!-- Title -->
                 <div class="title-bar">
                     <h1 data-i18n="title"></h1>
-                     <!-- Info Button (Top Right) -->
+                    <!-- Info Button (Top Right) -->
                     <button id="info-btn" class="info-btn">
                         <img src="assets/images/icon_info.svg" alt="Info">
                     </button>
@@ -237,7 +245,7 @@
                     </div>
 
                     <div class="canvas-header">
-                         <div class="paint-toolbar">
+                        <div class="paint-toolbar">
                             <button id="tool-grid" class="tool-btn" title="Show Grid">
                             </button>
                             <button id="tool-pick" class="tool-btn" title="Eyedropper">
@@ -250,7 +258,7 @@
                             <span id="zoom-display">1.0x</span>
                         </div>
                     </div>
-                    
+
                     <canvas id="paint-canvas"></canvas>
                 </div>
 
@@ -275,6 +283,7 @@
                 <button class="lang-option" data-lang="zh-TW">繁體中文</button>
                 <button class="lang-option" data-lang="zh-CN">简体中文</button>
                 <button class="lang-option" data-lang="en">English</button>
+                <button class="lang-option" data-lang="th">ภาษาไทย</button>
             </div>
         </div>
     </div>
@@ -305,46 +314,55 @@
 
                 <h2 data-i18n="usageInstructionsTitle"></h2>
                 <p data-i18n="usageInstructionsContent"></p>
-                
-                
+
+
                 <div class="developer-info">
                     <h2 data-i18n="developerInfoTitle"></h2>
                     <p data-i18n="developerInfoContent"></p>
 
                     <div class="social-links">
                         <div class="social-link">
-                            <span data-i18n="gameIdLabel"></span><span id="game-id">162hkm95</span><span class="copied_text hidden" data-i18n="copiedText"></span>
+                            <span data-i18n="gameIdLabel"></span><span id="game-id">162hkm95</span><span
+                                class="copied_text hidden" data-i18n="copiedText"></span>
                         </div>
                         <div class="social-link">
                             <a href="https://www.linkedin.com/in/zerochansy/" target="_blank">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
-                                    <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                                    <path
+                                        d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
+                                    </path>
                                 </svg>ZEROCHANSY
                             </a>
                         </div>
                         <div class="social-link">
                             <a href="https://www.instagram.com/zerochansy" target="_blank">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="#E4405F">
-                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
+                                    </path>
                                 </svg>ZEROCHANSY
                             </a>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="donation">
                     <div class="donation-title" data-i18n="donationTitle"></div>
                     <p class="donation-desc" data-i18n="donationDesc"></p>
 
 
-                    <a href="https://www.paypal.com/paypalme/zerochansy" target="_blank"><p class="donation-desc" data-i18n="paypalDonation"></p></a>
+                    <a href="https://www.paypal.com/paypalme/zerochansy" target="_blank">
+                        <p class="donation-desc" data-i18n="paypalDonation"></p>
+                    </a>
 
                     <div>
-                        <a href="#"><p id="wechat-qr" data-i18n="wechatDonation"></p></a>
+                        <a href="#">
+                            <p id="wechat-qr" data-i18n="wechatDonation"></p>
+                        </a>
                     </div>
                 </div>
 
-               
+
             </div>
         </div>
     </div>
@@ -362,16 +380,17 @@
         </div>
 
 
-    <div id="color-svg" class="hidden"></div>
+        <div id="color-svg" class="hidden"></div>
 
-    <!-- Scripts -->
-    <script src="./assets/js/color_loader.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="./assets/js/lang.js"></script>
-    <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/canvas.js"></script>
-    <script src="./assets/js/tools.js"></script>
-    <script src="./assets/js/loadsvg.js"></script>
+        <!-- Scripts -->
+        <script src="./assets/js/color_loader.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+        <script src="./assets/js/lang.js"></script>
+        <script src="./assets/js/app.js"></script>
+        <script src="./assets/js/canvas.js"></script>
+        <script src="./assets/js/tools.js"></script>
+        <script src="./assets/js/loadsvg.js"></script>
 </body>
+
 </html>
