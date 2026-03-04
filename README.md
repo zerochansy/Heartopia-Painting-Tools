@@ -56,6 +56,9 @@ Your support gives the developer more motivation～\
 
 ## Change Log
 
+v1.0.7 - 20260305
+- Added Thai language support, thank you [@Crapmoo](https://github.com/Crapmoo)
+
 v1.0.6 - 20260204
 - Remove the transparent color
 - Prevent the color load twice
