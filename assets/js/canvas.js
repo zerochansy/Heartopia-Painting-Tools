@@ -8,7 +8,7 @@ const canvas = {
     properties: {
         element: null,
         context: null,
-        ratio: '16:9',
+        ratio: "16:9",
         level: 0,
         gridWidth: 30,
         gridHeight: 18,
@@ -21,25 +21,52 @@ const canvas = {
         dragStartY: 0,
         highlightGridPos: null,
         canvasWidth: 1100,
-        canvasHeight: 630
+        canvasHeight: 630,
     },
 
     // Color grid data
     pixelGrid: [],
     gridDimensions: {
-        '16:9': [[30, 18], [50, 28], [100, 56], [150, 84]],
-        '4:3': [[30, 24], [50, 38], [100, 76], [150, 114]],
-        '1:1': [[30, 30], [50, 50], [100, 100], [150, 150]],
-        '3:4': [[24, 30], [38, 50], [76, 100], [114, 150]],
-        '9:16': [[18, 30], [28, 50], [56, 100], [84, 150]]
+        "16:9": [
+            [30, 18],
+            [50, 28],
+            [100, 56],
+            [150, 84],
+        ],
+        "4:3": [
+            [30, 24],
+            [50, 38],
+            [100, 76],
+            [150, 114],
+        ],
+        "1:1": [
+            [30, 30],
+            [50, 50],
+            [100, 100],
+            [150, 150],
+        ],
+        "3:4": [
+            [24, 30],
+            [38, 50],
+            [76, 100],
+            [114, 150],
+        ],
+        "9:16": [
+            [18, 30],
+            [28, 50],
+            [56, 100],
+            [84, 150],
+        ],
     },
 
     /**
      * Initialize canvas
      */
     initialize(ratio, level, imageData) {
-        this.properties.element = document.getElementById('paint-canvas');
-        this.properties.context = this.properties.element.getContext('2d', { willReadFrequently: true });
+        this.properties.element = document.getElementById("paint-canvas");
+        this.properties.context = this.properties.element.getContext("2d", {
+            willReadFrequently: true,
+        });
         this.properties.ratio = ratio;
         this.properties.level = level;
 
@@ -84,11 +111,11 @@ const canvas = {
         // Get actual canvas dimensions
         const canvasWidth = this.properties.element.width;
         const canvasHeight = this.properties.element.height;
-        
+
         // Calculate grid size without zoom (zoom is applied in draw with pixelSize multiplication)
         const gridPixelWidth = this.properties.pixelSize * this.properties.gridWidth;
         const gridPixelHeight = this.properties.pixelSize * this.properties.gridHeight;
-        
+
         // Center without considering zoom - zoom is applied during rendering
         this.properties.offsetX = (canvasWidth - gridPixelWidth) / 2;
         this.properties.offsetY = (canvasHeight - gridPixelHeight) / 2;
@@ -102,7 +129,7 @@ const canvas = {
         for (let y = 0; y < this.properties.gridHeight; y++) {
             this.pixelGrid[y] = [];
             for (let x = 0; x < this.properties.gridWidth; x++) {
-                this.pixelGrid[y][x] = '#FFFFFF';
+                this.pixelGrid[y][x] = "#FFFFFF";
             }
         }
     },
@@ -114,16 +141,21 @@ const canvas = {
         const img = new Image();
         img.onload = () => {
             // Create temporary canvas to resize image
-            const tempCanvas = document.createElement('canvas');
+            const tempCanvas = document.createElement("canvas");
             tempCanvas.width = this.properties.gridWidth;
             tempCanvas.height = this.properties.gridHeight;
-            const tempCtx = tempCanvas.getContext('2d');
+            const tempCtx = tempCanvas.getContext("2d");
 
             // Draw resized image
             tempCtx.drawImage(img, 0, 0, this.properties.gridWidth, this.properties.gridHeight);
 
             // Get image data
-            const imageData = tempCtx.getImageData(0, 0, this.properties.gridWidth, this.properties.gridHeight);
+            const imageData = tempCtx.getImageData(
+                0,
+                0,
+                this.properties.gridWidth,
+                this.properties.gridHeight,
+            );
             const data = imageData.data;
 
             // Convert to available colors
@@ -157,7 +189,7 @@ const canvas = {
      */
     getAllAvailableColors(colorGroups) {
         const allColors = [];
-        Object.values(colorGroups).forEach(group => {
+        Object.values(colorGroups).forEach((group) => {
             if (group.colors) {
                 allColors.push(...group.colors);
             }
@@ -172,12 +204,10 @@ const canvas = {
         let closestColor = colorPalette[0];
         let minDistance = Infinity;
 
-        colorPalette.forEach(hexColor => {
+        colorPalette.forEach((hexColor) => {
             const [pr, pg, pb] = this.hexToRgb(hexColor);
             const distance = Math.sqrt(
-                Math.pow(r - pr, 2) +
-                Math.pow(g - pg, 2) +
-                Math.pow(b - pb, 2)
+                Math.pow(r - pr, 2) + Math.pow(g - pg, 2) + Math.pow(b - pb, 2),
             );
 
             if (distance < minDistance) {
@@ -194,11 +224,9 @@ const canvas = {
      */
     hexToRgb(hex) {
         const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-        return result ? [
-            parseInt(result[1], 16),
-            parseInt(result[2], 16),
-            parseInt(result[3], 16)
-        ] : [255, 255, 255];
+        return result
+            ? [parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16)]
+            : [255, 255, 255];
     },
 
     /**
@@ -208,20 +236,20 @@ const canvas = {
         const element = this.properties.element;
 
         // Mouse events
-        element.addEventListener('mousedown', (e) => this.handleMouseDown(e));
-        element.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-        element.addEventListener('mouseup', (e) => this.handleMouseUp(e));
-        element.addEventListener('wheel', (e) => this.handleWheel(e));
-        element.addEventListener('contextmenu', (e) => e.preventDefault());
+        element.addEventListener("mousedown", (e) => this.handleMouseDown(e));
+        element.addEventListener("mousemove", (e) => this.handleMouseMove(e));
+        element.addEventListener("mouseup", (e) => this.handleMouseUp(e));
+        element.addEventListener("wheel", (e) => this.handleWheel(e));
+        element.addEventListener("contextmenu", (e) => e.preventDefault());
 
         // Touch events (use non-passive so we can preventDefault and control scrolling)
-        element.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: false });
-        element.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: false });
-        element.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: false });
+        element.addEventListener("touchstart", (e) => this.handleTouchStart(e), { passive: false });
+        element.addEventListener("touchmove", (e) => this.handleTouchMove(e), { passive: false });
+        element.addEventListener("touchend", (e) => this.handleTouchEnd(e), { passive: false });
 
         // Zoom slider
-        const zoomSlider = document.getElementById('zoom-slider');
-        zoomSlider.addEventListener('input', (e) => {
+        const zoomSlider = document.getElementById("zoom-slider");
+        zoomSlider.addEventListener("input", (e) => {
             const newZoom = parseFloat(e.target.value);
             this.setZoom(newZoom);
             this.draw();
@@ -246,7 +274,7 @@ const canvas = {
                 this.properties.isDragging = true;
                 this.properties.dragStartX = x;
                 this.properties.dragStartY = y;
-                this.properties.element.style.cursor = 'grabbing';
+                this.properties.element.style.cursor = "grabbing";
             }
         }
     },
@@ -258,18 +286,18 @@ const canvas = {
         const pos = this.getCanvasCoords(e.clientX, e.clientY);
         const x = pos.x;
         const y = pos.y;
-        
+
         // Update highlight position when using eyedropper
         if (window.tools && window.tools.eyedropperActive) {
             const gridPos = this.getGridPosition(x, y);
             this.properties.highlightGridPos = gridPos;
-            this.properties.element.style.cursor = 'crosshair';
+            this.properties.element.style.cursor = "crosshair";
             this.draw();
         } else if (!this.properties.isDragging) {
             // Show grab cursor when not dragging (ready to drag)
-            this.properties.element.style.cursor = 'grab';
+            this.properties.element.style.cursor = "grab";
         }
-        
+
         if (this.properties.isDragging) {
             const dx = x - this.properties.dragStartX;
             const dy = y - this.properties.dragStartY;
@@ -295,7 +323,7 @@ const canvas = {
             this.properties.isDragging = false;
             // Reset cursor to grab when not dragging
             if (window.tools && !window.tools.eyedropperActive) {
-                this.properties.element.style.cursor = 'grab';
+                this.properties.element.style.cursor = "grab";
             }
         }
     },
@@ -338,7 +366,7 @@ const canvas = {
                 this.properties.isDragging = true;
                 this.properties.dragStartX = x;
                 this.properties.dragStartY = y;
-                this.properties.element.style.cursor = 'grabbing';
+                this.properties.element.style.cursor = "grabbing";
             }
         }
     },
@@ -356,7 +384,7 @@ const canvas = {
             const touch2 = e.touches[1];
             const dist = Math.hypot(
                 touch1.clientX - touch2.clientX,
-                touch1.clientY - touch2.clientY
+                touch1.clientY - touch2.clientY,
             );
             // Pinch zoom can be implemented here if desired
         } else if (e.touches.length === 1) {
@@ -369,7 +397,7 @@ const canvas = {
             if (window.tools && window.tools.eyedropperActive) {
                 const gridPos = this.getGridPosition(x, y);
                 this.properties.highlightGridPos = gridPos;
-                this.properties.element.style.cursor = 'crosshair';
+                this.properties.element.style.cursor = "crosshair";
                 e.preventDefault();
                 this.draw();
                 return;
@@ -400,7 +428,7 @@ const canvas = {
         if (this.properties.isDragging) {
             this.properties.isDragging = false;
             if (window.tools && !window.tools.eyedropperActive) {
-                this.properties.element.style.cursor = 'grab';
+                this.properties.element.style.cursor = "grab";
             }
         }
 
@@ -419,8 +447,12 @@ const canvas = {
         const gridX = Math.floor((x - this.properties.offsetX) / pixelSize);
         const gridY = Math.floor((y - this.properties.offsetY) / pixelSize);
 
-        if (gridX >= 0 && gridX < this.properties.gridWidth &&
-            gridY >= 0 && gridY < this.properties.gridHeight) {
+        if (
+            gridX >= 0 &&
+            gridX < this.properties.gridWidth &&
+            gridY >= 0 &&
+            gridY < this.properties.gridHeight
+        ) {
             return { x: gridX, y: gridY };
         }
         return null;
@@ -453,7 +485,7 @@ const canvas = {
 
         // Determine pivot point in canvas internal coords
         let pivotX, pivotY;
-        if (typeof clientX === 'number' && typeof clientY === 'number') {
+        if (typeof clientX === "number" && typeof clientY === "number") {
             const p = this.getCanvasCoords(clientX, clientY);
             pivotX = p.x;
             pivotY = p.y;
@@ -463,16 +495,18 @@ const canvas = {
         }
 
         // Keep the world point under pivot stable: offset' = pivot - (pivot - offset) * (new/old)
-        this.properties.offsetX = pivotX - (pivotX - this.properties.offsetX) * (newPixelSize / oldPixelSize);
-        this.properties.offsetY = pivotY - (pivotY - this.properties.offsetY) * (newPixelSize / oldPixelSize);
+        this.properties.offsetX =
+            pivotX - (pivotX - this.properties.offsetX) * (newPixelSize / oldPixelSize);
+        this.properties.offsetY =
+            pivotY - (pivotY - this.properties.offsetY) * (newPixelSize / oldPixelSize);
 
         this.properties.zoom = newZoom;
 
         // Update UI controls if present
-        const slider = document.getElementById('zoom-slider');
+        const slider = document.getElementById("zoom-slider");
         if (slider) slider.value = newZoom;
-        const display = document.getElementById('zoom-display');
-        if (display) display.textContent = newZoom.toFixed(1) + 'x';
+        const display = document.getElementById("zoom-display");
+        if (display) display.textContent = newZoom.toFixed(1) + "x";
 
         // Keep offsets in valid range
         this.clampOffsets();
@@ -515,11 +549,13 @@ const canvas = {
     pickColor(x, y) {
         const color = this.pixelGrid[y][x];
         app.state.currentColor = color;
-        
+
         // Trigger color selection event
-        document.dispatchEvent(new CustomEvent('colorPicked', {
-            detail: { color: color }
-        }));
+        document.dispatchEvent(
+            new CustomEvent("colorPicked", {
+                detail: { color: color },
+            }),
+        );
     },
 
     /**
@@ -530,7 +566,7 @@ const canvas = {
         const pixelSize = this.properties.pixelSize * this.properties.zoom;
 
         // Clear canvas
-        ctx.fillStyle = '#FFFFFF';
+        ctx.fillStyle = "#FFFFFF";
         ctx.fillRect(0, 0, this.properties.element.width, this.properties.element.height);
 
         // Draw grid
@@ -541,15 +577,20 @@ const canvas = {
         for (let y = 0; y < this.properties.gridHeight; y++) {
             for (let x = 0; x < this.properties.gridWidth; x++) {
                 // Determine fill style; if tutorial active, dim non-current tutorial color
-                let pixelColor = this.pixelGrid[y][x] || '#FFFFFF';
-                if (window.tools && window.tools.tutorialActive && Array.isArray(window.tools.tutorialData) && window.tools.tutorialData.length > 0) {
+                let pixelColor = this.pixelGrid[y][x] || "#FFFFFF";
+                if (
+                    window.tools &&
+                    window.tools.tutorialActive &&
+                    Array.isArray(window.tools.tutorialData) &&
+                    window.tools.tutorialData.length > 0
+                ) {
                     const curIdx = window.tools.currentTutorialStep || 0;
-                    const highlightColor = (window.tools.tutorialData[curIdx] || '').toLowerCase();
+                    const highlightColor = (window.tools.tutorialData[curIdx] || "").toLowerCase();
                     if (pixelColor.toLowerCase() === highlightColor) {
                         ctx.fillStyle = pixelColor;
                     } else {
                         // dim other colors
-                        ctx.fillStyle = '#F3F3F3';
+                        ctx.fillStyle = "#F3F3F3";
                     }
                 } else {
                     ctx.fillStyle = pixelColor;
@@ -566,7 +607,7 @@ const canvas = {
         // Draw thicker 5x5 group borders counting from bottom-left
         if (window.tools && window.tools.gridVisible) {
             ctx.lineWidth = 3;
-            ctx.strokeStyle = '#999999';
+            ctx.strokeStyle = "#999999";
 
             const gridPixelWidth = pixelSize * this.properties.gridWidth;
             const gridPixelHeight = pixelSize * this.properties.gridHeight;
@@ -596,33 +637,28 @@ const canvas = {
         // Draw picker highlight if active
         if (window.tools && window.tools.eyedropperActive && this.properties.highlightGridPos) {
             const pos = this.properties.highlightGridPos;
-            ctx.strokeStyle = '#FFFFFF';
+            ctx.strokeStyle = "#FFFFFF";
             ctx.lineWidth = 4;
-            ctx.strokeRect(
-                pos.x * pixelSize,
-                pos.y * pixelSize,
-                pixelSize,
-                pixelSize
-            );
-            
+            ctx.strokeRect(pos.x * pixelSize, pos.y * pixelSize, pixelSize, pixelSize);
+
             // Add black outline for better visibility
-            ctx.strokeStyle = '#000000';
+            ctx.strokeStyle = "#000000";
             ctx.lineWidth = 2;
             ctx.strokeRect(
                 pos.x * pixelSize - 2,
                 pos.y * pixelSize - 2,
                 pixelSize + 4,
-                pixelSize + 4
+                pixelSize + 4,
             );
-            
+
             // Add extra inner border
-            ctx.strokeStyle = '#FFFF00';
+            ctx.strokeStyle = "#FFFF00";
             ctx.lineWidth = 1;
             ctx.strokeRect(
                 pos.x * pixelSize + 1,
                 pos.y * pixelSize + 1,
                 pixelSize - 2,
-                pixelSize - 2
+                pixelSize - 2,
             );
         }
 
@@ -633,7 +669,7 @@ const canvas = {
      * Draw grid lines
      */
     drawGridLine(ctx, x, y, pixelSize) {
-        ctx.strokeStyle = '#999999';
+        ctx.strokeStyle = "#999999";
         ctx.lineWidth = 1;
 
         // Regular grid
@@ -655,7 +691,7 @@ const canvas = {
             ctx.lineTo((x + 1) * pixelSize, (y + 1) * pixelSize);
             ctx.stroke();
         }
-    }
+    },
 };
 
 // Make canvas globally available

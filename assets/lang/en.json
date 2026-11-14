@@ -8,6 +8,8 @@
     "next": "Next",
     "back": "Back",
     "uploadText": "Drag or click to upload image",
+    "changeImage": "Change Image",
+    "removeImage": "Remove Image",
     "loading": "Generating painting...",
     "selectLanguage": "Select Language",
     "infoTitle": "About This Application & Developer",
