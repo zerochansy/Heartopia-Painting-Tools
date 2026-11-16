@@ -238,7 +238,7 @@ const canvas = {
         // Mouse events
         element.addEventListener("mousedown", (e) => this.handleMouseDown(e));
         element.addEventListener("mousemove", (e) => this.handleMouseMove(e));
-        element.addEventListener("mouseup", (e) => this.handleMouseUp(e));
+        window.addEventListener("mouseup", (e) => this.handleMouseUp(e));
         element.addEventListener("wheel", (e) => this.handleWheel(e));
         element.addEventListener("contextmenu", (e) => e.preventDefault());
 
@@ -264,7 +264,12 @@ const canvas = {
         const x = pos.x;
         const y = pos.y;
 
-        if (e.button === 0) {
+        if (e.button === 2) {
+            this.properties.isDragging = true;
+            this.properties.dragStartX = x;
+            this.properties.dragStartY = y;
+            this.properties.element.style.cursor = "grabbing";
+        } else if (e.button === 0) {
             // Left click - pick color if eyedropper active, otherwise drag
             const gridPos = this.getGridPosition(x, y);
             if (gridPos && window.tools && window.tools.eyedropperActive) {
@@ -299,6 +304,7 @@ const canvas = {
         }
 
         if (this.properties.isDragging) {
+            this.properties.element.style.cursor = "grabbing";
             const dx = x - this.properties.dragStartX;
             const dy = y - this.properties.dragStartY;
 
@@ -319,12 +325,10 @@ const canvas = {
      * Handle mouse up
      */
     handleMouseUp(e) {
-        if (e.button === 0) {
+        if (e.button === 0 || e.button === 2) {
             this.properties.isDragging = false;
-            // Reset cursor to grab when not dragging
-            if (window.tools && !window.tools.eyedropperActive) {
-                this.properties.element.style.cursor = "grab";
-            }
+            this.properties.element.style.cursor =
+                window.tools && window.tools.eyedropperActive ? "crosshair" : "grab";
         }
     },
 

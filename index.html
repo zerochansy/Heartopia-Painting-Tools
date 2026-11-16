@@ -222,6 +222,22 @@
                         </div>
                     </div>
 
+                    <!-- Upload Progress -->
+                    <div
+                        id="upload-progress"
+                        class="upload-progress hidden"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        <progress
+                            id="upload-progress-bar"
+                            max="100"
+                            value="0"
+                            aria-label="Image loading progress"
+                        ></progress>
+                        <span id="upload-progress-text">0%</span>
+                    </div>
+
                     <!-- Next Button -->
                     <button
                         class="btn-next"

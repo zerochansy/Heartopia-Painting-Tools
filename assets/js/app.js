@@ -49,6 +49,8 @@ const app = {
         currentColorGroup: 1,
         currentColor: "#051616",
     },
+    uploadRequestId: 0,
+    uploadProgressTimeout: null,
 
     /**
      * Initialize the application
@@ -213,24 +215,64 @@ const app = {
             return;
         }
 
+        const requestId = ++this.uploadRequestId;
+        this.startUploadProgress();
         const reader = new FileReader();
-        reader.onload = (e) => {
-            // Auto-crop the center portion to the selected aspect and grid size
-            this.autoCropCenter(e.target.result);
+        reader.onprogress = (e) => {
+            if (requestId !== this.uploadRequestId || !e.lengthComputable) return;
+            this.updateUploadProgress((e.loaded / e.total) * 90);
         };
+        reader.onload = (e) => {
+            if (requestId !== this.uploadRequestId) return;
+            this.updateUploadProgress(90);
+            // Auto-crop the center portion to the selected aspect and grid size
+            this.autoCropCenter(e.target.result, requestId);
+        };
+        reader.onerror = () => this.failUpload(requestId, "Unable to read image file.");
         reader.readAsDataURL(file);
+    },
+
+    startUploadProgress() {
+        clearTimeout(this.uploadProgressTimeout);
+        document.getElementById("upload-progress").classList.remove("hidden");
+        this.updateUploadProgress(0);
+    },
+
+    updateUploadProgress(value) {
+        const progress = Math.round(Math.min(100, Math.max(0, value)));
+        document.getElementById("upload-progress-bar").value = progress;
+        document.getElementById("upload-progress-text").textContent = `${progress}%`;
+    },
+
+    finishUploadProgress(requestId) {
+        if (requestId !== this.uploadRequestId) return;
+        this.updateUploadProgress(100);
+        this.uploadProgressTimeout = setTimeout(() => {
+            if (requestId === this.uploadRequestId) {
+                document.getElementById("upload-progress").classList.add("hidden");
+            }
+        }, 400);
+    },
+
+    failUpload(requestId, message) {
+        if (requestId !== this.uploadRequestId) return;
+        clearTimeout(this.uploadProgressTimeout);
+        document.getElementById("upload-progress").classList.add("hidden");
+        document.getElementById("image-input").value = "";
+        alert(message);
     },
 
     /**
      * Show crop modal to allow user to crop uploaded image to selected aspect ratio
      */
-    autoCropCenter(imageData) {
+    autoCropCenter(imageData, requestId) {
         const dims = this.gridDimensions[this.state.selectedRatio][this.state.selectedLevel];
         const gridW = dims[0];
         const gridH = dims[1];
 
         const img = new Image();
         img.onload = () => {
+            if (requestId !== this.uploadRequestId) return;
             const nw = img.naturalWidth;
             const nh = img.naturalHeight;
             const desiredAspect = gridW / gridH;
@@ -272,7 +314,9 @@ const app = {
             this.state.uploadedImagePreview = highResData;
             this.displayImagePreview(highResData);
             this.enableNextButton();
+            this.finishUploadProgress(requestId);
         };
+        img.onerror = () => this.failUpload(requestId, "Unable to load image.");
         img.src = imageData;
     },
 
@@ -296,6 +340,9 @@ const app = {
      * Remove the selected image and return to the upload prompt
      */
     removeUploadedImage() {
+        this.uploadRequestId++;
+        clearTimeout(this.uploadProgressTimeout);
+        document.getElementById("upload-progress").classList.add("hidden");
         this.state.uploadedImage = null;
         this.state.uploadedImagePreview = null;
 
@@ -401,6 +448,9 @@ const app = {
      * Reset application state
      */
     resetState() {
+        this.uploadRequestId++;
+        clearTimeout(this.uploadProgressTimeout);
+        document.getElementById("upload-progress").classList.add("hidden");
         this.state = {
             currentStep: 1,
             selectedRatio: "16:9",
