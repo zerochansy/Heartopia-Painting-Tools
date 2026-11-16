@@ -21,6 +21,18 @@ This tool is designed for Heartopia players, automatically converting uploaded i
 
 ## 👉 Usage Instructions | 使用說明
 
+### Run a downloaded copy locally | 本機執行下載的版本
+
+Do not open `index.html` directly. Browsers block the app's local `fetch()` requests on `file://` pages. From the repository directory, start a local web server:
+
+```bash
+python3 -m http.server 8000
+```
+
+Then open [http://localhost:8000/](http://localhost:8000/) in your browser.
+
+請勿直接開啟 `index.html`。瀏覽器會封鎖 `file://` 頁面對本機檔案的 `fetch()` 請求。請在專案目錄啟動本機伺服器，再於瀏覽器開啟 `http://localhost:8000/`。
+
 [Website Link | 網頁連結](https://zerochansy.github.io/Heartopia-Painting-Tools/) \
 \
 ![image](https://github.com/zerochansy/Heartopia-Painting-Tools/blob/main/assets/preview/preview.jpg)
@@ -33,13 +45,11 @@ This tool is designed for Heartopia players, automatically converting uploaded i
 
 ## 👉 About the Developer | 關於開發者
 
-
 The developer is a designer and game developer, and also a dedicated 'Heartbeat Town' player. Welcome to visit and like my game island!\
 開發者是一名設計師兼遊戲開發者，也是《心動小鎮》的忠實玩家。歡迎來我的遊戲小島點讚！\
 \
 Game ID | 遊戲ID - 162hkm95 (TW/HK/MO)\
 [Instagram](https://www.instagram.com/zerochansy) [LinkedIn](https://www.linkedin.com/in/zerochansy/)
-
 
 ## ❤️ Support the Developer | ❤️ 支持開發者
 
@@ -53,16 +63,23 @@ Your support gives the developer more motivation～\
 👉 WeChat Pay | 微信支付 \
 ![image](https://github.com/zerochansy/Heartopia-Painting-Tools/blob/main/assets/images/wechat_pay.jpg)
 
-
 ## Change Log
 
+v1.0.8 - 20261114
+
+- Added Bahasa Indonesia language support
+- Added options to replace or remove an uploaded image before continuing
+
 v1.0.7 - 20260305
+
 - Added Thai language support, thank you [@Crapmoo](https://github.com/Crapmoo)
 
 v1.0.6 - 20260204
+
 - Remove the transparent color
 - Prevent the color load twice
 - Fix bug
 
 v1.0.5 - 20260124
+
 - Fix bug

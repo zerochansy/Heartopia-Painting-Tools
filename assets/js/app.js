@@ -6,24 +6,51 @@
 const app = {
     // Grid dimensions for each ratio and precision level
     gridDimensions: {
-        '16:9': [[30, 18], [50, 28], [100, 56], [150, 84]],
-        '4:3': [[30, 24], [50, 38], [100, 76], [150, 114]],
-        '1:1': [[30, 30], [50, 50], [100, 100], [150, 150]],
-        '3:4': [[24, 30], [38, 50], [76, 100], [114, 150]],
-        '9:16': [[18, 30], [28, 50], [56, 100], [84, 150]]
+        "16:9": [
+            [30, 18],
+            [50, 28],
+            [100, 56],
+            [150, 84],
+        ],
+        "4:3": [
+            [30, 24],
+            [50, 38],
+            [100, 76],
+            [150, 114],
+        ],
+        "1:1": [
+            [30, 30],
+            [50, 50],
+            [100, 100],
+            [150, 150],
+        ],
+        "3:4": [
+            [24, 30],
+            [38, 50],
+            [76, 100],
+            [114, 150],
+        ],
+        "9:16": [
+            [18, 30],
+            [28, 50],
+            [56, 100],
+            [84, 150],
+        ],
     },
 
     // Current state
     state: {
         currentStep: 1,
-        selectedRatio: '16:9',
+        selectedRatio: "16:9",
         selectedLevel: 0,
         uploadedImage: null,
         pixelArt: null,
         colors: {},
         currentColorGroup: 1,
-        currentColor: '#051616'
+        currentColor: "#051616",
     },
+    uploadRequestId: 0,
+    uploadProgressTimeout: null,
 
     /**
      * Initialize the application
@@ -39,70 +66,77 @@ const app = {
      */
     setupEventListeners() {
         // Size selection
-        document.querySelectorAll('.size-item').forEach(item => {
-            item.addEventListener('click', () => this.selectSize(item));
+        document.querySelectorAll(".size-item").forEach((item) => {
+            item.addEventListener("click", () => this.selectSize(item));
         });
 
         // Level selection
-        document.querySelectorAll('.level-item').forEach(item => {
-            item.addEventListener('click', () => this.selectLevel(item));
+        document.querySelectorAll(".level-item").forEach((item) => {
+            item.addEventListener("click", () => this.selectLevel(item));
         });
 
         // Upload area
-        const uploadArea = document.getElementById('upload-area');
-        const imageInput = document.getElementById('image-input');
+        const uploadArea = document.getElementById("upload-area");
+        const imageInput = document.getElementById("image-input");
 
-        uploadArea.addEventListener('click', () => imageInput.click());
-        uploadArea.addEventListener('dragover', (e) => {
+        uploadArea.addEventListener("click", () => imageInput.click());
+        uploadArea.addEventListener("dragover", (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = '#997C7B';
-            uploadArea.style.backgroundColor = '#FFF6EA';
+            uploadArea.style.borderColor = "#997C7B";
+            uploadArea.style.backgroundColor = "#FFF6EA";
         });
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.borderColor = '#FFE4BA';
-            uploadArea.style.backgroundColor = 'transparent';
+        uploadArea.addEventListener("dragleave", () => {
+            uploadArea.style.borderColor = "#FFE4BA";
+            uploadArea.style.backgroundColor = "transparent";
         });
-        uploadArea.addEventListener('drop', (e) => {
+        uploadArea.addEventListener("drop", (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = '#FFE4BA';
-            uploadArea.style.backgroundColor = 'transparent';
+            uploadArea.style.borderColor = "#FFE4BA";
+            uploadArea.style.backgroundColor = "transparent";
             const files = e.dataTransfer.files;
             if (files.length > 0) {
                 this.handleImageUpload(files[0]);
             }
         });
 
-        imageInput.addEventListener('change', (e) => {
+        imageInput.addEventListener("change", (e) => {
             if (e.target.files.length > 0) {
                 this.handleImageUpload(e.target.files[0]);
             }
         });
 
+        document.getElementById("change-image-btn").addEventListener("click", () => {
+            imageInput.click();
+        });
+        document.getElementById("remove-image-btn").addEventListener("click", () => {
+            this.removeUploadedImage();
+        });
+
         // Info button
-        document.getElementById('info-btn').addEventListener('click', () => {
-            document.getElementById('info-popup').classList.remove('hidden');
+        document.getElementById("info-btn").addEventListener("click", () => {
+            document.getElementById("info-popup").classList.remove("hidden");
         });
 
-        document.querySelector('.btn-close').addEventListener('click', () => {
-            document.getElementById('info-popup').classList.add('hidden');
+        document.querySelector(".btn-close").addEventListener("click", () => {
+            document.getElementById("info-popup").classList.add("hidden");
         });
 
-        document.getElementById('info-popup').addEventListener('click', (e) => {
-            if (e.target.id === 'info-popup') {
-                document.getElementById('info-popup').classList.add('hidden');
+        document.getElementById("info-popup").addEventListener("click", (e) => {
+            if (e.target.id === "info-popup") {
+                document.getElementById("info-popup").classList.add("hidden");
             }
         });
 
         // Home button: reload the page to fully reset the application
-        document.getElementById('btn-home').addEventListener('click', () => {
+        document.getElementById("btn-home").addEventListener("click", () => {
             window.location.reload();
         });
 
         // WeChat QR click -> show popup with QR image
-        const wechatEl = document.getElementById('wechat-qr');
+        const wechatEl = document.getElementById("wechat-qr");
         if (wechatEl) {
-            wechatEl.style.cursor = 'pointer';
-            wechatEl.addEventListener('click', () => this.showWeChatPopup());
+            wechatEl.style.cursor = "pointer";
+            wechatEl.addEventListener("click", () => this.showWeChatPopup());
         }
     },
 
@@ -112,15 +146,19 @@ const app = {
     async initializeColorLoader() {
         try {
             const colorData = await colorLoader.initialize();
+            if (!colorData) {
+                return;
+            }
+
             this.state.colors = colorData;
-            console.log('Colors loaded:', colorData);
-            
+            console.log("Colors loaded:", colorData);
+
             // Setup color panel after colors are loaded
             if (window.tools) {
                 tools.setupColorPanel();
             }
         } catch (error) {
-            console.error('Error loading colors:', error);
+            console.error("Error loading colors:", error);
         }
     },
 
@@ -129,13 +167,13 @@ const app = {
      */
     selectSize(item) {
         // Remove previous selection
-        document.querySelectorAll('.size-item').forEach(s => {
-            s.setAttribute('data-selected', 'false');
+        document.querySelectorAll(".size-item").forEach((s) => {
+            s.setAttribute("data-selected", "false");
         });
 
         // Set new selection
-        item.setAttribute('data-selected', 'true');
-        this.state.selectedRatio = item.getAttribute('data-ratio');
+        item.setAttribute("data-selected", "true");
+        this.state.selectedRatio = item.getAttribute("data-ratio");
 
         // Update grid display
         this.updateGridDisplay();
@@ -146,13 +184,13 @@ const app = {
      */
     selectLevel(item) {
         // Remove previous selection
-        document.querySelectorAll('.level-item').forEach(l => {
-            l.setAttribute('data-selected', 'false');
+        document.querySelectorAll(".level-item").forEach((l) => {
+            l.setAttribute("data-selected", "false");
         });
 
         // Set new selection
-        item.setAttribute('data-selected', 'true');
-        this.state.selectedLevel = parseInt(item.getAttribute('data-level'));
+        item.setAttribute("data-selected", "true");
+        this.state.selectedLevel = parseInt(item.getAttribute("data-level"));
 
         // Update grid display
         this.updateGridDisplay();
@@ -163,7 +201,7 @@ const app = {
      */
     updateGridDisplay() {
         const dims = this.gridDimensions[this.state.selectedRatio][this.state.selectedLevel];
-        const gridDisplay = document.getElementById('grid-display');
+        const gridDisplay = document.getElementById("grid-display");
         gridDisplay.textContent = `${dims[0]} x ${dims[1]}`;
     },
 
@@ -172,29 +210,69 @@ const app = {
      */
     handleImageUpload(file) {
         // Validate file
-        if (!file.type.startsWith('image/')) {
-            alert('Please upload an image file');
+        if (!file.type.startsWith("image/")) {
+            alert("Please upload an image file");
             return;
         }
 
+        const requestId = ++this.uploadRequestId;
+        this.startUploadProgress();
         const reader = new FileReader();
-        reader.onload = (e) => {
-            // Auto-crop the center portion to the selected aspect and grid size
-            this.autoCropCenter(e.target.result);
+        reader.onprogress = (e) => {
+            if (requestId !== this.uploadRequestId || !e.lengthComputable) return;
+            this.updateUploadProgress((e.loaded / e.total) * 90);
         };
+        reader.onload = (e) => {
+            if (requestId !== this.uploadRequestId) return;
+            this.updateUploadProgress(90);
+            // Auto-crop the center portion to the selected aspect and grid size
+            this.autoCropCenter(e.target.result, requestId);
+        };
+        reader.onerror = () => this.failUpload(requestId, "Unable to read image file.");
         reader.readAsDataURL(file);
+    },
+
+    startUploadProgress() {
+        clearTimeout(this.uploadProgressTimeout);
+        document.getElementById("upload-progress").classList.remove("hidden");
+        this.updateUploadProgress(0);
+    },
+
+    updateUploadProgress(value) {
+        const progress = Math.round(Math.min(100, Math.max(0, value)));
+        document.getElementById("upload-progress-bar").value = progress;
+        document.getElementById("upload-progress-text").textContent = `${progress}%`;
+    },
+
+    finishUploadProgress(requestId) {
+        if (requestId !== this.uploadRequestId) return;
+        this.updateUploadProgress(100);
+        this.uploadProgressTimeout = setTimeout(() => {
+            if (requestId === this.uploadRequestId) {
+                document.getElementById("upload-progress").classList.add("hidden");
+            }
+        }, 400);
+    },
+
+    failUpload(requestId, message) {
+        if (requestId !== this.uploadRequestId) return;
+        clearTimeout(this.uploadProgressTimeout);
+        document.getElementById("upload-progress").classList.add("hidden");
+        document.getElementById("image-input").value = "";
+        alert(message);
     },
 
     /**
      * Show crop modal to allow user to crop uploaded image to selected aspect ratio
      */
-    autoCropCenter(imageData) {
+    autoCropCenter(imageData, requestId) {
         const dims = this.gridDimensions[this.state.selectedRatio][this.state.selectedLevel];
         const gridW = dims[0];
         const gridH = dims[1];
 
         const img = new Image();
         img.onload = () => {
+            if (requestId !== this.uploadRequestId) return;
             const nw = img.naturalWidth;
             const nh = img.naturalHeight;
             const desiredAspect = gridW / gridH;
@@ -216,27 +294,29 @@ const app = {
             }
 
             // Create high-resolution cropped image (preserve original quality)
-            const highCanvas = document.createElement('canvas');
+            const highCanvas = document.createElement("canvas");
             highCanvas.width = sw;
             highCanvas.height = sh;
-            const hctx = highCanvas.getContext('2d');
+            const hctx = highCanvas.getContext("2d");
             hctx.drawImage(img, sx, sy, sw, sh, 0, 0, sw, sh);
-            const highResData = highCanvas.toDataURL('image/png');
+            const highResData = highCanvas.toDataURL("image/png");
 
             // Create grid-sized image for processing (low-res)
-            const gridCanvas = document.createElement('canvas');
+            const gridCanvas = document.createElement("canvas");
             gridCanvas.width = gridW;
             gridCanvas.height = gridH;
-            const gctx = gridCanvas.getContext('2d');
+            const gctx = gridCanvas.getContext("2d");
             gctx.drawImage(img, sx, sy, sw, sh, 0, 0, gridW, gridH);
-            const gridData = gridCanvas.toDataURL('image/png');
+            const gridData = gridCanvas.toDataURL("image/png");
 
             // Use the low-res image for processing, but show the high-res preview
             this.state.uploadedImage = gridData;
             this.state.uploadedImagePreview = highResData;
             this.displayImagePreview(highResData);
             this.enableNextButton();
+            this.finishUploadProgress(requestId);
         };
+        img.onerror = () => this.failUpload(requestId, "Unable to load image.");
         img.src = imageData;
     },
 
@@ -244,22 +324,46 @@ const app = {
      * Display image preview
      */
     displayImagePreview(imageData) {
-        const uploadArea = document.getElementById('upload-area');
-        const imagePreview = document.getElementById('image-preview');
+        const uploadArea = document.getElementById("upload-area");
+        const imagePreview = document.getElementById("image-preview");
+        const previewImage = document.getElementById("image-preview-img");
 
-        uploadArea.style.display = 'none';
-        imagePreview.classList.remove('hidden');
-        imagePreview.innerHTML = `<img src="${imageData}" alt="Preview">`;
+        uploadArea.style.display = "none";
+        imagePreview.classList.remove("hidden");
+        previewImage.src = imageData;
         // Clear file input so selecting the same file again will trigger change
-        const imgInput = document.getElementById('image-input');
-        if (imgInput) imgInput.value = '';
+        const imgInput = document.getElementById("image-input");
+        if (imgInput) imgInput.value = "";
+    },
+
+    /**
+     * Remove the selected image and return to the upload prompt
+     */
+    removeUploadedImage() {
+        this.uploadRequestId++;
+        clearTimeout(this.uploadProgressTimeout);
+        document.getElementById("upload-progress").classList.add("hidden");
+        this.state.uploadedImage = null;
+        this.state.uploadedImagePreview = null;
+
+        const uploadArea = document.getElementById("upload-area");
+        const imagePreview = document.getElementById("image-preview");
+        const previewImage = document.getElementById("image-preview-img");
+        const nextBtn = document.getElementById("btn-step2-next");
+        const imageInput = document.getElementById("image-input");
+
+        previewImage.removeAttribute("src");
+        imagePreview.classList.add("hidden");
+        uploadArea.style.display = "flex";
+        nextBtn.disabled = true;
+        imageInput.value = "";
     },
 
     /**
      * Enable next button
      */
     enableNextButton() {
-        const nextBtn = document.getElementById('btn-step2-next');
+        const nextBtn = document.getElementById("btn-step2-next");
         nextBtn.disabled = false;
     },
 
@@ -268,14 +372,14 @@ const app = {
      */
     goToStep(step) {
         // Hide all steps
-        document.querySelectorAll('.step').forEach(s => {
-            s.classList.add('hidden');
+        document.querySelectorAll(".step").forEach((s) => {
+            s.classList.add("hidden");
         });
 
         // Show specific step
         const stepElement = document.getElementById(`step-${step}`);
         if (stepElement) {
-            stepElement.classList.remove('hidden');
+            stepElement.classList.remove("hidden");
         }
 
         this.state.currentStep = step;
@@ -325,7 +429,7 @@ const app = {
             window.canvas.initialize(
                 this.state.selectedRatio,
                 this.state.selectedLevel,
-                this.state.uploadedImage
+                this.state.uploadedImage,
             );
         }
 
@@ -344,36 +448,45 @@ const app = {
      * Reset application state
      */
     resetState() {
+        this.uploadRequestId++;
+        clearTimeout(this.uploadProgressTimeout);
+        document.getElementById("upload-progress").classList.add("hidden");
         this.state = {
             currentStep: 1,
-            selectedRatio: '16:9',
+            selectedRatio: "16:9",
             selectedLevel: 0,
             uploadedImage: null,
             pixelArt: null,
             colors: this.state.colors,
             currentColorGroup: 1,
-            currentColor: '#051616'
+            currentColor: "#051616",
         };
 
         // Reset UI
-        document.getElementById('upload-area').style.display = 'flex';
-        document.getElementById('image-preview').classList.add('hidden');
-        document.getElementById('btn-step2-next').disabled = true;
+        document.getElementById("upload-area").style.display = "flex";
+        document.getElementById("image-preview").classList.add("hidden");
+        document.getElementById("btn-step2-next").disabled = true;
 
         // Reset size selection
-        document.querySelectorAll('.size-item').forEach(item => {
-            item.setAttribute('data-selected', item.getAttribute('data-ratio') === '16:9' ? 'true' : 'false');
+        document.querySelectorAll(".size-item").forEach((item) => {
+            item.setAttribute(
+                "data-selected",
+                item.getAttribute("data-ratio") === "16:9" ? "true" : "false",
+            );
         });
 
         // Reset level selection
-        document.querySelectorAll('.level-item').forEach(item => {
-            item.setAttribute('data-selected', item.getAttribute('data-level') === '0' ? 'true' : 'false');
+        document.querySelectorAll(".level-item").forEach((item) => {
+            item.setAttribute(
+                "data-selected",
+                item.getAttribute("data-level") === "0" ? "true" : "false",
+            );
         });
 
         this.updateGridDisplay();
         // Clear file input to allow re-uploading same file
-        const imgInput = document.getElementById('image-input');
-        if (imgInput) imgInput.value = '';
+        const imgInput = document.getElementById("image-input");
+        if (imgInput) imgInput.value = "";
     },
 
     /**
@@ -381,56 +494,77 @@ const app = {
      */
     showWeChatPopup() {
         // Remove existing if present
-        const existing = document.getElementById('wechat-popup');
+        const existing = document.getElementById("wechat-popup");
         if (existing) existing.remove();
 
-        const modal = document.createElement('div');
-        modal.id = 'wechat-popup';
+        const modal = document.createElement("div");
+        modal.id = "wechat-popup";
         Object.assign(modal.style, {
-            position: 'fixed', inset: '0', background: 'rgba(0,0,0,0.6)', display: 'flex',
-            alignItems: 'center', justifyContent: 'center', zIndex: 99999
+            position: "fixed",
+            inset: "0",
+            background: "rgba(0,0,0,0.6)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 99999,
         });
 
-        const panel = document.createElement('div');
-        Object.assign(panel.style, { position: 'relative', background: '#fff', padding: '12px', borderRadius: '8px', maxWidth: '90%', maxHeight: '90%', boxSizing: 'border-box' });
+        const panel = document.createElement("div");
+        Object.assign(panel.style, {
+            position: "relative",
+            background: "#fff",
+            padding: "12px",
+            borderRadius: "8px",
+            maxWidth: "90%",
+            maxHeight: "90%",
+            boxSizing: "border-box",
+        });
 
-        const img = document.createElement('img');
-        img.src = 'assets/images/wechat_pay.jpg';
-        img.alt = 'WeChat Pay QR';
-        Object.assign(img.style, { maxWidth: '400px', width: '100%', height: 'auto', display: 'block', borderRadius: '4px' });
+        const img = document.createElement("img");
+        img.src = "assets/images/wechat_pay.jpg";
+        img.alt = "WeChat Pay QR";
+        Object.assign(img.style, {
+            maxWidth: "400px",
+            width: "100%",
+            height: "auto",
+            display: "block",
+            borderRadius: "4px",
+        });
 
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.title = 'Close';
-        btn.className = 'btn-close';
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.title = "Close";
+        btn.className = "btn-close";
 
-        const closeImg = document.createElement('img');
-        closeImg.src = 'assets/images/icon_btn_close.svg';
-        closeImg.alt = 'Close';
-       
+        const closeImg = document.createElement("img");
+        closeImg.src = "assets/images/icon_btn_close.svg";
+        closeImg.alt = "Close";
+
         btn.appendChild(closeImg);
-        btn.addEventListener('click', () => modal.remove());
-        modal.addEventListener('click', (e) => { if (e.target === modal) modal.remove(); });
+        btn.addEventListener("click", () => modal.remove());
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.remove();
+        });
 
         panel.appendChild(img);
         panel.appendChild(btn);
         modal.appendChild(panel);
         document.body.appendChild(modal);
-    }
+    },
 };
 
 // Initialize app when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     // Wait for color loader to be ready
-    if (typeof colorLoader !== 'undefined') {
+    if (typeof colorLoader !== "undefined") {
         app.init();
     } else {
-        console.error('Color loader not loaded');
+        console.error("Color loader not loaded");
     }
 });
 
-const gameIdElement = document.querySelector('#game-id');
-gameIdElement.addEventListener('click', function() {
+const gameIdElement = document.querySelector("#game-id");
+gameIdElement.addEventListener("click", function () {
     const text = this.textContent;
     navigator.clipboard.writeText(text).then(() => {
         const originalText = this.textContent;
@@ -440,9 +574,7 @@ gameIdElement.addEventListener('click', function() {
         }, 1500);
     });
 });
-gameIdElement.style.cursor = 'pointer';
-gameIdElement.title = '點擊複製遊戲ID';
+gameIdElement.style.cursor = "pointer";
+gameIdElement.title = "點擊複製遊戲ID";
 
-$("div").click(function(e){
-    
-});
+$("div").click(function (e) {});

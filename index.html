@@ -1,384 +1,446 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title data-i18n="title">Heartopia Painting Tools</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="title">Heartopia Painting Tools</title>
+        <link rel="icon" type="image/png" href="assets/images/site_icon.png" />
 
+        <!-- Primary Meta Tags -->
+        <meta name="title" data-i18n="title" content="Heartopia Painting Tools" />
+        <meta
+            name="description"
+            data-i18n="toolsInfoContent"
+            content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily."
+        />
 
-    <link rel="icon" type="image/png" href="assets/images/site_icon.png" />
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://zerochansy.github.io/Heartopia-Painting-Tools/" />
+        <meta property="og:title" data-i18n="title" content="Heartopia Painting Tools" />
+        <meta
+            property="og:description"
+            data-i18n="toolsInfoContent"
+            content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily."
+        />
+        <meta
+            property="og:image"
+            content="https://zerochansy.github.io/Heartopia-Painting-Tools/assets/images/seo.jpg"
+        />
 
-    <!-- Primary Meta Tags -->
-    <title data-i18n="title">Heartopia Painting Tools</title>
-    <meta name="title" data-i18n="title" content="Heartopia Painting Tools" />
-    <meta name="description" data-i18n="toolsInfoContent"
-        content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily." />
+        <!-- X (Twitter) -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:url"
+            content="https://zerochansy.github.io/Heartopia-Painting-Tools/"
+        />
+        <meta property="twitter:title" data-i18n="title" content="Heartopia Painting Tools" />
+        <meta
+            property="twitter:description"
+            data-i18n="toolsInfoContent"
+            content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily."
+        />
+        <meta
+            property="twitter:image"
+            content="https://zerochansy.github.io/Heartopia-Painting-Tools/assets/images/seo.jpg"
+        />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://zerochansy.github.io/Heartopia-Painting-Tools/" />
-    <meta property="og:title" data-i18n="title" content="Heartopia Painting Tools" />
-    <meta property="og:description" data-i18n="toolsInfoContent"
-        content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily." />
-    <meta property="og:image" content="https://zerochansy.github.io/Heartopia-Painting-Tools/assets/images/seo.jpg" />
+        <!-- Meta Tags Generated with https://metatags.io -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- X (Twitter) -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://zerochansy.github.io/Heartopia-Painting-Tools/" />
-    <meta property="twitter:title" data-i18n="title" content="Heartopia Painting Tools" />
-    <meta property="twitter:description" data-i18n="toolsInfoContent"
-        content="This tool is designed for Heartopia players, automatically converting uploaded images into pixel art format suitable for in-game painting, helping players easily create pixel-style artworks. When the developer reached level 14 in the game, they experienced the challenges of painting within the game firsthand, which inspired the creation of this program to help other art-loving players create more easily." />
-    <meta property="twitter:image"
-        content="https://zerochansy.github.io/Heartopia-Painting-Tools/assets/images/seo.jpg" />
+        <!-- Owl Carousel -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        />
 
-    <!-- Meta Tags Generated with https://metatags.io -->
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chiron+GoRound+TC:wght@200..900&display=swap" rel="stylesheet">
+        <!-- Styles -->
+        <link rel="stylesheet" href="./assets/css/style.css" />
+    </head>
 
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-</head>
-
-<body>
-    <span id="version">v1.0.7</span>
-    <!-- Main Container -->
-    <div id="app-container" class="app-container">
-        <!-- Language Button -->
-        <button id="lang-btn" class="lang-btn" title="Change Language">
-            <img src="assets/images/icon_btn_lang.svg" alt="Language">
-        </button>
-
-
-
-        <!-- Step 1: Size Selection -->
-        <div id="step-1" class="step">
-            <div class="panel">
-                <!-- Title -->
-                <div class="title-bar">
-                    <h1 data-i18n="title"></h1>
-                    <!-- Info Button (Top Right) -->
-                    <button id="info-btn" class="info-btn">
-                        <img src="assets/images/icon_info.svg" alt="Info">
-                    </button>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="progress-bar">
-                    <div class="progress-step active">
-                        <span data-i18n="step1"></span>
-                    </div>
-                    <div class="progress-step">
-                        <span data-i18n="step2"></span>
-                    </div>
-                    <div class="progress-step">
-                        <span data-i18n="step3"></span>
-                    </div>
-                </div>
-
-                <!-- Size Selection -->
-                <div class="size-container">
-                    <div class="size-grid">
-                        <div class="size-item" data-ratio="16:9" data-selected="true">
-                            <div class="size-item-selected"></div>
-                            <img src="./assets/images/size_item_16_9.png" alt="16:9">
-                        </div>
-                        <div class="size-item" data-ratio="4:3">
-                            <div class="size-item-selected"></div>
-                            <img src="./assets/images/size_item_4_3.png" alt="4:3">
-                        </div>
-                        <div class="size-item" data-ratio="1:1">
-                            <div class="size-item-selected"></div>
-                            <img src="./assets/images/size_item_1_1.png" alt="1:1">
-                        </div>
-                        <div class="size-item" data-ratio="3:4">
-                            <div class="size-item-selected"></div>
-                            <img src="./assets/images/size_item_3_4.png" alt="3:4">
-                        </div>
-                        <div class="size-item" data-ratio="9:16">
-                            <div class="size-item-selected"></div>
-                            <img src="./assets/images/size_item_9_16.png" alt="9:16">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Level and Grid Info -->
-                <div class="level-container">
-                    <span data-i18n="precision"></span>
-                    <div class="level-selector">
-                        <div class="level-items">
-                            <div class="level-item" data-level="0" data-selected="true">
-                                <img src="./assets/images/level_item_1.png" alt="Small">
-                            </div>
-                            <div class="level-item" data-level="1">
-                                <img src="./assets/images/level_item_2.png" alt="Medium">
-                            </div>
-                            <div class="level-item" data-level="2">
-                                <img src="./assets/images/level_item_3.png" alt="Large">
-                            </div>
-                            <div class="level-item" data-level="3">
-                                <img src="./assets/images/level_item_4.png" alt="Extra Large">
-                            </div>
-                        </div>
-                    </div>
-
-                    <span data-i18n="gridSize"></span>
-                    <div class="grid-info">
-                        <div class="grid-display" id="grid-display"></div>
-                    </div>
-                </div>
-
-                <!-- Next Button -->
-                <button class="btn-next" onclick="app.nextStep()" data-i18n="next"></button>
-            </div>
-        </div>
-
-        <!-- Step 2: Image Upload -->
-        <div id="step-2" class="step hidden">
-            <div class="panel">
-                <!-- Title -->
-                <div class="title-bar">
-                    <h1 data-i18n="title"></h1>
-                    <!-- Info Button (Top Right) -->
-                    <button id="info-btn" class="info-btn">
-                        <img src="assets/images/icon_info.svg" alt="Info">
-                    </button>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="progress-bar">
-                    <div class="progress-step completed">
-                        <span data-i18n="step1"></span>
-                    </div>
-                    <div class="progress-step active">
-                        <span data-i18n="step2"></span>
-                    </div>
-                    <div class="progress-step">
-                        <span data-i18n="step3"></span>
-                    </div>
-                </div>
-
-                <!-- Upload Area -->
-                <div class="upload-container">
-                    <div id="upload-area" class="upload-area">
-                        <svg class="upload-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                        </svg>
-                        <p data-i18n="uploadText"></p>
-                        <input type="file" id="image-input" accept="image/*" style="display: none;">
-                    </div>
-                    <div id="image-preview" class="image-preview hidden"></div>
-                </div>
-
-                <!-- Next Button -->
-                <button class="btn-next" id="btn-step2-next" disabled onclick="app.nextStep()"
-                    data-i18n="next"></button>
-            </div>
-        </div>
-
-        <!-- Step 3: Loading -->
-        <div id="step-3" class="step hidden">
-            <div class="panel">
-                <!-- Title -->
-                <div class="title-bar">
-                    <h1 data-i18n="title"></h1>
-                    <!-- Info Button (Top Right) -->
-                    <button id="info-btn" class="info-btn">
-                        <img src="assets/images/icon_info.svg" alt="Info">
-                    </button>
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="progress-bar">
-                    <div class="progress-step completed">
-                        <span data-i18n="step1"></span>
-                    </div>
-                    <div class="progress-step completed">
-                        <span data-i18n="step2"></span>
-                    </div>
-                    <div class="progress-step active">
-                        <span data-i18n="step3"></span>
-                    </div>
-                </div>
-
-                <!-- Loading Area -->
-                <div class="loading-container">
-                    <div id="loading-icon"></div>
-                    <p data-i18n="loading"></p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Step 4: Painting -->
-        <div id="step-4" class="step hidden">
-            <button id="btn-home" class="btn-home">
-                <img src="assets/images/icon_replay.svg" alt="Home">
+    <body>
+        <span id="version">v1.0.8</span>
+        <!-- Main Container -->
+        <div id="app-container" class="app-container">
+            <!-- Language Button -->
+            <button id="lang-btn" class="lang-btn" title="Change Language">
+                <img src="assets/images/icon_btn_lang.svg" alt="Language" />
             </button>
 
-            <div class="paint-container">
-                <!-- Canvas Area (Center) -->
-                <div class="canvas-wrapper">
+            <!-- Step 1: Size Selection -->
+            <div id="step-1" class="step">
+                <div class="panel">
+                    <!-- Title -->
+                    <div class="title-bar">
+                        <h1 data-i18n="title"></h1>
+                        <!-- Info Button (Top Right) -->
+                        <button id="info-btn" class="info-btn">
+                            <img src="assets/images/icon_info.svg" alt="Info" />
+                        </button>
+                    </div>
 
-                    <div id="tutorial-panel" class="tutorial-panel hidden">
-                        <button class="tut-btn" id="tut-first">
-                        </button>
-                        <div class="tut-step-info">
-                            <button class="tut-btn" id="tut-prev">
-                            </button>
-                            <div class="tut-step" data-i18n="stepText"></div>
-                            <div class="tut-step" id="tut-step-num"></div>
-                            <button class="tut-btn" id="tut-next">
-                            </button>
+                    <!-- Progress Bar -->
+                    <div class="progress-bar">
+                        <div class="progress-step active">
+                            <span data-i18n="step1"></span>
                         </div>
-                        <button class="tut-btn" id="tut-last">
-                        </button>
-                        <div class="tut-current-color">
-                            <div class="tut-color-display color-display" id="tut-color"></div>
+                        <div class="progress-step">
+                            <span data-i18n="step2"></span>
+                        </div>
+                        <div class="progress-step">
+                            <span data-i18n="step3"></span>
                         </div>
                     </div>
 
-                    <div class="canvas-header">
-                        <div class="paint-toolbar">
-                            <button id="tool-grid" class="tool-btn" title="Show Grid">
-                            </button>
-                            <button id="tool-pick" class="tool-btn" title="Eyedropper">
-                            </button>
-                            <button id="tool-teach" class="tool-btn" title="Tutorial">
-                            </button>
-                        </div>
-                        <div class="zoom-controls">
-                            <input type="range" id="zoom-slider" min="1" max="10" value="1" step="0.1">
-                            <span id="zoom-display">1.0x</span>
+                    <!-- Size Selection -->
+                    <div class="size-container">
+                        <div class="size-grid">
+                            <div class="size-item" data-ratio="16:9" data-selected="true">
+                                <div class="size-item-selected"></div>
+                                <img src="./assets/images/size_item_16_9.png" alt="16:9" />
+                            </div>
+                            <div class="size-item" data-ratio="4:3">
+                                <div class="size-item-selected"></div>
+                                <img src="./assets/images/size_item_4_3.png" alt="4:3" />
+                            </div>
+                            <div class="size-item" data-ratio="1:1">
+                                <div class="size-item-selected"></div>
+                                <img src="./assets/images/size_item_1_1.png" alt="1:1" />
+                            </div>
+                            <div class="size-item" data-ratio="3:4">
+                                <div class="size-item-selected"></div>
+                                <img src="./assets/images/size_item_3_4.png" alt="3:4" />
+                            </div>
+                            <div class="size-item" data-ratio="9:16">
+                                <div class="size-item-selected"></div>
+                                <img src="./assets/images/size_item_9_16.png" alt="9:16" />
+                            </div>
                         </div>
                     </div>
 
-                    <canvas id="paint-canvas"></canvas>
+                    <!-- Level and Grid Info -->
+                    <div class="level-container">
+                        <span data-i18n="precision"></span>
+                        <div class="level-selector">
+                            <div class="level-items">
+                                <div class="level-item" data-level="0" data-selected="true">
+                                    <img src="./assets/images/level_item_1.png" alt="Small" />
+                                </div>
+                                <div class="level-item" data-level="1">
+                                    <img src="./assets/images/level_item_2.png" alt="Medium" />
+                                </div>
+                                <div class="level-item" data-level="2">
+                                    <img src="./assets/images/level_item_3.png" alt="Large" />
+                                </div>
+                                <div class="level-item" data-level="3">
+                                    <img src="./assets/images/level_item_4.png" alt="Extra Large" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <span data-i18n="gridSize"></span>
+                        <div class="grid-info">
+                            <div class="grid-display" id="grid-display"></div>
+                        </div>
+                    </div>
+
+                    <!-- Next Button -->
+                    <button class="btn-next" onclick="app.nextStep()" data-i18n="next"></button>
                 </div>
+            </div>
 
-                <!-- Color Panel (Right) -->
-                <div class="color-panel">
-                    <!-- Color Groups Slider -->
-                    <div class="color-groups-display owl-carousel" id="color-groups-display"></div>
+            <!-- Step 2: Image Upload -->
+            <div id="step-2" class="step hidden">
+                <div class="panel">
+                    <!-- Title -->
+                    <div class="title-bar">
+                        <h1 data-i18n="title"></h1>
+                        <!-- Info Button (Top Right) -->
+                        <button id="info-btn" class="info-btn">
+                            <img src="assets/images/icon_info.svg" alt="Info" />
+                        </button>
+                    </div>
 
-                    <!-- Color Details -->
-                    <div id="color-details" class="color-details"></div>
+                    <!-- Progress Bar -->
+                    <div class="progress-bar">
+                        <div class="progress-step completed">
+                            <span data-i18n="step1"></span>
+                        </div>
+                        <div class="progress-step active">
+                            <span data-i18n="step2"></span>
+                        </div>
+                        <div class="progress-step">
+                            <span data-i18n="step3"></span>
+                        </div>
+                    </div>
+
+                    <!-- Upload Area -->
+                    <div class="upload-container">
+                        <div id="upload-area" class="upload-area">
+                            <svg
+                                class="upload-icon"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                            </svg>
+                            <p data-i18n="uploadText"></p>
+                            <input
+                                type="file"
+                                id="image-input"
+                                accept="image/*"
+                                style="display: none"
+                            />
+                        </div>
+                        <div id="image-preview" class="image-preview hidden">
+                            <img id="image-preview-img" alt="Preview" />
+                            <div class="image-preview-actions">
+                                <button
+                                    type="button"
+                                    id="change-image-btn"
+                                    class="image-preview-action"
+                                    data-i18n="changeImage"
+                                ></button>
+                                <button
+                                    type="button"
+                                    id="remove-image-btn"
+                                    class="image-preview-action"
+                                    data-i18n="removeImage"
+                                ></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Progress -->
+                    <div
+                        id="upload-progress"
+                        class="upload-progress hidden"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        <progress
+                            id="upload-progress-bar"
+                            max="100"
+                            value="0"
+                            aria-label="Image loading progress"
+                        ></progress>
+                        <span id="upload-progress-text">0%</span>
+                    </div>
+
+                    <!-- Next Button -->
+                    <button
+                        class="btn-next"
+                        id="btn-step2-next"
+                        disabled
+                        onclick="app.nextStep()"
+                        data-i18n="next"
+                    ></button>
+                </div>
+            </div>
+
+            <!-- Step 3: Loading -->
+            <div id="step-3" class="step hidden">
+                <div class="panel">
+                    <!-- Title -->
+                    <div class="title-bar">
+                        <h1 data-i18n="title"></h1>
+                        <!-- Info Button (Top Right) -->
+                        <button id="info-btn" class="info-btn">
+                            <img src="assets/images/icon_info.svg" alt="Info" />
+                        </button>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="progress-bar">
+                        <div class="progress-step completed">
+                            <span data-i18n="step1"></span>
+                        </div>
+                        <div class="progress-step completed">
+                            <span data-i18n="step2"></span>
+                        </div>
+                        <div class="progress-step active">
+                            <span data-i18n="step3"></span>
+                        </div>
+                    </div>
+
+                    <!-- Loading Area -->
+                    <div class="loading-container">
+                        <div id="loading-icon"></div>
+                        <p data-i18n="loading"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Painting -->
+            <div id="step-4" class="step hidden">
+                <button id="btn-home" class="btn-home">
+                    <img src="assets/images/icon_replay.svg" alt="Home" />
+                </button>
+
+                <div class="paint-container">
+                    <!-- Canvas Area (Center) -->
+                    <div class="canvas-wrapper">
+                        <div id="tutorial-panel" class="tutorial-panel hidden">
+                            <button class="tut-btn" id="tut-first"></button>
+                            <div class="tut-step-info">
+                                <button class="tut-btn" id="tut-prev"></button>
+                                <div class="tut-step" data-i18n="stepText"></div>
+                                <div class="tut-step" id="tut-step-num"></div>
+                                <button class="tut-btn" id="tut-next"></button>
+                            </div>
+                            <button class="tut-btn" id="tut-last"></button>
+                            <div class="tut-current-color">
+                                <div class="tut-color-display color-display" id="tut-color"></div>
+                            </div>
+                        </div>
+
+                        <div class="canvas-header">
+                            <div class="paint-toolbar">
+                                <button id="tool-grid" class="tool-btn" title="Show Grid"></button>
+                                <button id="tool-pick" class="tool-btn" title="Eyedropper"></button>
+                                <button id="tool-teach" class="tool-btn" title="Tutorial"></button>
+                            </div>
+                            <div class="zoom-controls">
+                                <input
+                                    type="range"
+                                    id="zoom-slider"
+                                    min="1"
+                                    max="10"
+                                    value="1"
+                                    step="0.1"
+                                />
+                                <span id="zoom-display">1.0x</span>
+                            </div>
+                        </div>
+
+                        <canvas id="paint-canvas"></canvas>
+                    </div>
+
+                    <!-- Color Panel (Right) -->
+                    <div class="color-panel">
+                        <!-- Color Groups Slider -->
+                        <div
+                            class="color-groups-display owl-carousel"
+                            id="color-groups-display"
+                        ></div>
+
+                        <!-- Color Details -->
+                        <div id="color-details" class="color-details"></div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Language Popup -->
-    <div id="lang-popup" class="popup hidden">
-        <div class="popup-overlay"></div>
-        <div class="popup-content">
-            <div class="popup-title" data-i18n="selectLanguage"></div>
-            <div class="lang-options">
-                <button class="lang-option" data-lang="zh-TW">繁體中文</button>
-                <button class="lang-option" data-lang="zh-CN">简体中文</button>
-                <button class="lang-option" data-lang="en">English</button>
-                <button class="lang-option" data-lang="th">ภาษาไทย</button>
+        <!-- Language Popup -->
+        <div id="lang-popup" class="popup hidden">
+            <div class="popup-overlay"></div>
+            <div class="popup-content">
+                <div class="popup-title" data-i18n="selectLanguage"></div>
+                <div class="lang-options">
+                    <button class="lang-option" data-lang="zh-TW">繁體中文</button>
+                    <button class="lang-option" data-lang="zh-CN">简体中文</button>
+                    <button class="lang-option" data-lang="en">English</button>
+                    <button class="lang-option" data-lang="th">ภาษาไทย</button>
+                    <button class="lang-option" data-lang="id">Bahasa Indonesia</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Info Popup -->
-    <div id="info-popup" class="popup hidden">
-        <div class="popup-overlay"></div>
+        <!-- Info Popup -->
+        <div id="info-popup" class="popup hidden">
+            <div class="popup-overlay"></div>
 
-        <div class="panel">
+            <div class="panel">
+                <button class="btn-close">
+                    <img src="assets/images/icon_btn_close.svg" alt="Close" />
+                </button>
 
-            <button class="btn-close">
-                <img src="assets/images/icon_btn_close.svg" alt="Close">
-            </button>
+                <!-- Title -->
+                <div class="title-bar">
+                    <h1 data-i18n="infoTitle"></h1>
+                </div>
+                <div class="info-text" id="info-text">
+                    <h2 data-i18n="toolsInfoTitle"></h2>
+                    <p data-i18n="toolsInfoContent"></p>
 
-            <!-- Title -->
-            <div class="title-bar">
-                <h1 data-i18n="infoTitle"></h1>
-            </div>
-            <div class="info-text" id="info-text">
+                    <h2 data-i18n="mainFeaturesTitle"></h2>
+                    <p data-i18n="mainFeaturesContent"></p>
 
+                    <h2 data-i18n="usageInstructionsTitle"></h2>
+                    <p data-i18n="usageInstructionsContent"></p>
 
-                <h2 data-i18n="toolsInfoTitle"></h2>
-                <p data-i18n="toolsInfoContent"></p>
+                    <div class="developer-info">
+                        <h2 data-i18n="developerInfoTitle"></h2>
+                        <p data-i18n="developerInfoContent"></p>
 
-                <h2 data-i18n="mainFeaturesTitle"></h2>
-                <p data-i18n="mainFeaturesContent"></p>
-
-
-                <h2 data-i18n="usageInstructionsTitle"></h2>
-                <p data-i18n="usageInstructionsContent"></p>
-
-
-                <div class="developer-info">
-                    <h2 data-i18n="developerInfoTitle"></h2>
-                    <p data-i18n="developerInfoContent"></p>
-
-                    <div class="social-links">
-                        <div class="social-link">
-                            <span data-i18n="gameIdLabel"></span><span id="game-id">162hkm95</span><span
-                                class="copied_text hidden" data-i18n="copiedText"></span>
-                        </div>
-                        <div class="social-link">
-                            <a href="https://www.linkedin.com/in/zerochansy/" target="_blank">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
-                                    <path
-                                        d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z">
-                                    </path>
-                                </svg>ZEROCHANSY
-                            </a>
-                        </div>
-                        <div class="social-link">
-                            <a href="https://www.instagram.com/zerochansy" target="_blank">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="#E4405F">
-                                    <path
-                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z">
-                                    </path>
-                                </svg>ZEROCHANSY
-                            </a>
+                        <div class="social-links">
+                            <div class="social-link">
+                                <span data-i18n="gameIdLabel"></span
+                                ><span id="game-id">162hkm95</span
+                                ><span class="copied_text hidden" data-i18n="copiedText"></span>
+                            </div>
+                            <div class="social-link">
+                                <a href="https://www.linkedin.com/in/zerochansy/" target="_blank">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#0A66C2">
+                                        <path
+                                            d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"
+                                        ></path></svg
+                                    >ZEROCHANSY
+                                </a>
+                            </div>
+                            <div class="social-link">
+                                <a href="https://www.instagram.com/zerochansy" target="_blank">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#E4405F">
+                                        <path
+                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                                        ></path></svg
+                                    >ZEROCHANSY
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="donation">
-                    <div class="donation-title" data-i18n="donationTitle"></div>
-                    <p class="donation-desc" data-i18n="donationDesc"></p>
+                    <div class="donation">
+                        <div class="donation-title" data-i18n="donationTitle"></div>
+                        <p class="donation-desc" data-i18n="donationDesc"></p>
 
-
-                    <a href="https://www.paypal.com/paypalme/zerochansy" target="_blank">
-                        <p class="donation-desc" data-i18n="paypalDonation"></p>
-                    </a>
-
-                    <div>
-                        <a href="#">
-                            <p id="wechat-qr" data-i18n="wechatDonation"></p>
+                        <a href="https://www.paypal.com/paypalme/zerochansy" target="_blank">
+                            <p class="donation-desc" data-i18n="paypalDonation"></p>
                         </a>
+
+                        <div>
+                            <a href="#">
+                                <p id="wechat-qr" data-i18n="wechatDonation"></p>
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-
-            </div>
-        </div>
-    </div>
-
-    <div class="portrait-warning">
-        <div class="warning-content">
-            <div class="rotateMessageTop">
-                <span data-i18n="rotateMessageTop"></span>
-            </div>
-            <img src="assets/images/icon_rotate.png" alt="Warning" class="warning-icon">
-
-            <div class="rotateMessageBottom">
-                <span data-i18n="rotateMessageBottom"></span>
             </div>
         </div>
 
+        <div class="portrait-warning">
+            <div class="warning-content">
+                <div class="rotateMessageTop">
+                    <span data-i18n="rotateMessageTop"></span>
+                </div>
+                <img src="assets/images/icon_rotate.png" alt="Warning" class="warning-icon" />
+
+                <div class="rotateMessageBottom">
+                    <span data-i18n="rotateMessageBottom"></span>
+                </div>
+            </div>
+        </div>
 
         <div id="color-svg" class="hidden"></div>
 
@@ -391,6 +453,5 @@
         <script src="./assets/js/canvas.js"></script>
         <script src="./assets/js/tools.js"></script>
         <script src="./assets/js/loadsvg.js"></script>
-</body>
-
+    </body>
 </html>
